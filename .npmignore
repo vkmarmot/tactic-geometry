@@ -14,4 +14,9 @@ jest.*
 Gruntfile.*
 .idea
 .vscode
+.eslintrc.json
+.prettierrc
+.editorconfig
+.babelrc.js
 npm-debug.log
+yarn-error.log
