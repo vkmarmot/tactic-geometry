@@ -1,0 +1,17 @@
+.tmp
+/src
+/spec
+node_modules
+.sass-cache
+.awcache
+*.7z
+webpack.config.*
+tsconfig.*
+tslint.*
+wallaby.*
+jsdoc.*
+jest.*
+Gruntfile.*
+.idea
+.vscode
+npm-debug.log

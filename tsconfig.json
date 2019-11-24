@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "baseUrl": "./src",
+        "outDir": "./lib",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "importHelpers": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "esnext",
+        "lib": ["esnext", "dom"],
+        "types": ["jest"],
+        "allowJs": false
+    },
+    "include": [
+        "./@types/**/*.d.ts",
+        "./src/**/*.d.ts",
+        "./src/**/*.ts"
+    ]
+}

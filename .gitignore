@@ -1,0 +1,11 @@
+.tmp
+/dist
+/lib
+/docs
+node_modules
+.sass-cache
+.awcache
+*.7z
+.idea
+npm-debug.log
+/nbproject/private/

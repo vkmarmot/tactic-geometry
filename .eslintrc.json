@@ -1,0 +1,106 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "prettier",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "jest": true,
+        "browser": true,
+        "mocha": true,
+        "es6": true
+    },
+    "globals": {
+        "MAIN_WINDOW_WEBPACK_ENTRY": true,
+        "buildTime": true,
+        "IS_NPM": true,
+        "expect": true,
+        "cy": true,
+        "__": true,
+        "__LANG": true
+    },
+    "rules": {
+        "@typescript-eslint/explicit-member-accessibility": 1,
+        "jsx-a11y/no-autofocus": 0,
+        "jsx-a11y/label-has-associated-control": 0,
+        "jsx-a11y/alt-text": 0,
+        "import/no-named-as-default": 0,
+        "arrow-parens": ["error", "always"],
+        "function-paren-newline": 0,
+        "no-restricted-syntax": 0,
+        "no-mixed-operators": 0,
+        "no-restricted-globals": 0,
+        "no-plusplus": 0,
+        "import/extensions": 0,
+        "import/prefer-default-export": 0,
+        "max-len": [
+            "error",
+            120
+        ],
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "quotes": ["error", "double"],
+        "jsx-quotes": [
+            "error",
+            "prefer-double"
+        ],
+        "no-unused-vars": 0,
+        "no-underscore-dangle": 0,
+        "comma-dangle": ["error", {
+            "arrays": "never",
+            "objects": "never",
+            "imports": "never",
+            "exports": "never",
+            "functions": "ignore"
+        }],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "object-curly-newline": ["error", {
+            "ObjectExpression": { "multiline": true },
+            "ObjectPattern": { "multiline": true },
+            "ImportDeclaration": { "multiline": true },
+            "ExportDeclaration": { "multiline": true }
+        }],
+        "class-methods-use-this": [
+            "error",
+            {
+                "exceptMethods": [
+                    "render",
+                    "getInitialState",
+                    "getDefaultProps",
+                    "getChildContext",
+                    "componentWillMount",
+                    "componentDidMount",
+                    "shouldComponentUpdate",
+                    "componentDidUpdate",
+                    "componentWillUnmount"
+                ]
+            }
+        ]
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".ts",
+                    ".js",
+                    ".json"
+                ]
+            }
+        }
+    }
+}
