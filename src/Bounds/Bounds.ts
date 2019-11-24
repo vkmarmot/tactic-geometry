@@ -12,10 +12,10 @@ export const bounds = (a: Bounds | Point[] | Point | number[][] | number[], b?: 
 };
 
 export class Bounds {
-    private min: Point;
-    private max: Point;
+    public min: Point;
+    public max: Point;
 
-    constructor(a: Point | Point[] | number[][] | number[], b?: Point | number[]) { //(Point, Point) or Point[]
+    public constructor(a: Point | Point[] | number[][] | number[], b?: Point | number[]) { //(Point, Point) or Point[]
         if (!a) {
             return;
         }
@@ -32,7 +32,7 @@ export class Bounds {
     }
 
 
-    extend(pt: Point | number[]) { // (Point)
+    public extend(pt: Point | number[]): this { // (Point)
         pt = point(pt);
 
         if (!this.min && !this.max) {
@@ -47,25 +47,25 @@ export class Bounds {
         return this;
     }
 
-    getCenter(round = false) {
+    public getCenter(round = false): Point {
         return new Point(
             (this.min.x + this.max.x) / 2,
             (this.min.y + this.max.y) / 2, round);
     }
 
-    getBottomLeft() {
+    public getBottomLeft(): Point {
         return new Point(this.min.x, this.max.y);
     }
 
-    getTopRight() {
+    public getTopRight(): Point {
         return new Point(this.max.x, this.min.y);
     }
 
-    getSize() {
+    public getSize(): Point {
         return this.max.subtract(this.min);
     }
 
-    contains(obj: Bounds | Point | number[] | Point[]) {
+    public contains(obj: Bounds | Point | number[] | Point[]): boolean {
         let min: Point;
         let max: Point;
 
@@ -89,7 +89,7 @@ export class Bounds {
             (max.y <= this.max.y);
     }
 
-    intersects(boundsInput: Bounds | Point[]) { // (Bounds) -> Boolean
+    public intersects(boundsInput: Bounds | Point[]): boolean { // (Bounds) -> Boolean
         const b = bounds(boundsInput);
 
         const min = this.min,
@@ -102,23 +102,23 @@ export class Bounds {
         return xIntersects && yIntersects;
     }
 
-    isValid() {
+    public isValid(): boolean {
         return !!(this.min && this.max);
     }
 
-    toString() {
+    public toString(): string {
         return "{min:" +
             this.min.toString() + ", max:" +
             this.max.toString() +
             "}";
     }
 
-    diagonal() {
+    public diagonal(): number {
         const size = this.getSize();
         return Math.hypot(this.getSize().x, size.y);
     }
 
-    rotate(angle: number, offset = this.getCenter()) {
+    public rotate(angle: number, offset = this.getCenter()): Bounds {
         if (angle) {
             angle = -angle;
             const p1 = offset.add(
@@ -141,9 +141,9 @@ export class Bounds {
             return boundsNew;
         }
         return this;
-    };
+    }
 
-    getIntersect(b: Bounds) {
+    public getIntersect(b: Bounds): Bounds | undefined {
         if (!b || !this.intersects(b)) {
             return;
         }
@@ -156,15 +156,15 @@ export class Bounds {
         return bounds(southWest, northEast);
     }
 
-    equals(b: Bounds) {
+    public equals(b: Bounds): boolean {
         return !b || (b.min.equals(this.min) && b.max.equals(this.max));
     }
 
-    clone() {
+    public clone(): Bounds {
         return bounds(this.min.clone(), this.max.clone());
     }
 
-    toArray() {
+    public toArray(): number[][] {
         return [this.min.toArray(), this.max.toArray()];
     }
 }

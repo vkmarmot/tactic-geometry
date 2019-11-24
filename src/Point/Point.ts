@@ -31,77 +31,77 @@ export class Point {
     public x: number;
     public y: number;
 
-    constructor(x: number, y: number, round = false) {
+    public constructor(x: number, y: number, round = false) {
         this.x = round ? Math.round(x) : x;
         this.y = round ? Math.round(y) : y;
     };
 
-    clone() {
+    public clone(): Point {
         return new Point(this.x, this.y);
     }
 
-    add(p: Point | number[]) {
+    public add(p: Point | number[]): Point {
         return this.clone()._add(point(p));
     }
 
     // destructive, used directly for performance in situations where it's safe to modify existing point
-    _add(pt: Point) {
+    public _add(pt: Point): this {
         this.x += pt.x;
         this.y += pt.y;
         return this;
     }
 
-    subtract(p: Point | number[]) {
+    public subtract(p: Point | number[]): Point {
         return this.clone()._subtract(point(p));
     }
 
-    _subtract(pt: Point) {
+    public _subtract(pt: Point): this {
         this.x -= pt.x;
         this.y -= pt.y;
         return this;
     }
 
-    divideBy(num: number) {
+    public divideBy(num: number): Point {
         return this.clone()._divideBy(num);
     }
 
-    _divideBy(num: number) {
+    public _divideBy(num: number): this {
         this.x /= num;
         this.y /= num;
         return this;
     }
 
-    multiplyBy(num: number) {
+    public multiplyBy(num: number): Point {
         return this.clone()._multiplyBy(num);
     }
 
-    _multiplyBy(num: number) {
+    public _multiplyBy(num: number): this {
         this.x *= num;
         this.y *= num;
         return this;
     }
 
-    round() {
+    public round(): Point {
         return this.clone()._round();
     }
 
-    _round() {
+    public _round(): this {
         this.x = Math.round(this.x);
         this.y = Math.round(this.y);
         return this;
     }
 
-    floor() {
+    public floor(): Point {
         return this.clone()._floor();
     }
 
-    _floor() {
+    public _floor(): this {
         this.x = Math.floor(this.x);
         this.y = Math.floor(this.y);
         return this;
     }
 
-    distanceTo(p: Point | number[]) {
+    public distanceTo(p: Point | number[]): number {
         p = point(p);
 
         const x = p.x - this.x,
@@ -110,39 +110,39 @@ export class Point {
         return Math.sqrt(x * x + y * y);
     }
 
-    equals(p: Point | number[]) {
+    public equals(p: Point | number[]): boolean {
         p = point(p);
 
         return p.x === this.x && p.y === this.y;
     }
 
-    toString() {
+    public toString(): string {
         return `Point(${(this.x)}, ${(this.y)})`;
     }
 
-    angleTo(p: Point) {
+    public angleTo(p: Point): number {
         return Math.atan2(p.y - this.y, p.x - this.x);
     }
 
-    vectorAngleTo(p: Point) {
+    public vectorAngleTo(p: Point): number {
         const sqrtSelf = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
         const sqrtTo = Math.sqrt(Math.pow(p.x, 2) + Math.pow(p.y, 2));
         return Math.acos((this.x * p.x + this.y * p.y) / (sqrtSelf * sqrtTo));
     }
 
-    abs() {
+    public abs(): Point {
         return point(Math.abs(this.x), Math.abs(this.y));
     }
 
-    pointTo(angle: number, distance: number) {
+    public pointTo(angle: number, distance: number): Point {
         return point(-Math.sin(angle) * distance, Math.cos(angle) * distance)._add(this);
     }
 
-    rotate(angle: number) {
+    public rotate(angle: number): Point {
         return this.clone()._rotate(angle);
     }
 
-    _rotate(angle: number) {
+    public _rotate(angle: number): this {
         const angleDeg = (-angle * Math.PI) / 180;
         const {x, y} = this;
         this.x = x * Math.cos(angleDeg) - y * Math.sin(angleDeg);
@@ -150,7 +150,7 @@ export class Point {
         return this;
     }
 
-    fill(a: number[] | number | Point | { x: number; y: number }, b?: number) {
+    public fill(a: number[] | number | Point | { x: number; y: number }, b?: number): this {
         if (Array.isArray(a)) {
             [this.x, this.y] = a;
         } else if (typeof a === "number" && typeof b === "number") {
@@ -165,43 +165,43 @@ export class Point {
         return this;
     }
 
-    toArray() {
+    public toArray(): number[] {
         return [this.x, this.y];
     }
 
-    clamp(min: Point, max: Point) {
+    public clamp(min: Point, max: Point): Point {
         const {x, y} = this;
         return point(clamp(x, min.x, max.x), clamp(y, min.y, max.y));
     }
 
-    contains(src: Point | number[]) {
-        console.log("contains is deprecated. use closeTo")
+    public contains(src: Point | number[]): boolean {
+        console.log("contains is deprecated. use closeTo");
         return this.closeTo(src);
     }
 
-    closeTo(src: Point | number[]) {
+    public closeTo(src: Point | number[]): boolean {
         const pt = point(src);
         const diff = 1.0e-8;
         return Math.abs(pt.x) - Math.abs(this.x) <= diff && Math.abs(pt.y) - Math.abs(this.y) <= diff;
     }
 
-    ceil() {
+    public ceil(): Point {
         return this.clone()._ceil();
     }
 
-    toFixed(precision: number) {
+    public toFixed(precision: number): Point {
         return this.multiplyBy(precision)
             ._floor()
             .divideBy(precision);
     }
 
-    _ceil() {
+    public _ceil(): this {
         this.x = Math.ceil(this.x);
         this.y = Math.ceil(this.y);
         return this;
     }
 
-    public static lerp(p1: Point, p2: Point, a: number) {
+    public static lerp(p1: Point, p2: Point, a: number): Point {
         return point(lerp(p1.x, p2.x, a), lerp(p1.y, p2.y, a));
     };
 }
