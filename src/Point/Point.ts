@@ -175,7 +175,6 @@ export class Point {
     }
 
     public contains(src: Point | number[]): boolean {
-        console.log("contains is deprecated. use closeTo");
         return this.closeTo(src);
     }
 
