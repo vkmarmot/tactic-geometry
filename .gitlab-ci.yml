@@ -1,0 +1,25 @@
+image: node:15
+
+variables:
+    GIT_STRATEGY: "fetch"
+    GIT_SUBMODULE_STRATEGY: "normal"
+    GIT_CHECKOUT: "true"
+
+stages:
+    - build
+
+before_script:
+    - git checkout -B "$CI_COMMIT_REF_NAME" "$CI_COMMIT_SHA"
+    - echo "//gitlab.stc-spb.ru/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
+    - npm install
+
+cache:
+    paths:
+        - node_modules/
+
+
+build:
+    stage: build
+    script:
+        - npm run build
+        - npm publish
