@@ -1,5 +1,5 @@
 {
-    "name": "@tacticmaps/geometry",
+    "name": "tactic-geometry",
     "version": "1.0.4",
     "description": "Geometry module from tactic app",
     "main": "lib/index.js",
